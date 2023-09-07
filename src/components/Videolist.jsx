@@ -3,7 +3,11 @@ import Videoitem from './Videoitem'
 
 const Videolist = ({ videos, onVideoSelect }) => {
   const ListOfVideos = videos.map((video, i) => <Videoitem onVideoSelect={onVideoSelect} key={i} video={video} />)
-  return ListOfVideos;
+  return (
+    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+      { ListOfVideos }
+    </div>
+  );
 }
 
 export default Videolist

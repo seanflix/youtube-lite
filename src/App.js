@@ -1,7 +1,6 @@
 import React from 'react';
 import './App.css';
-import { Navbar, Searchbar, Videolist, Videodetail, Preview } from './components'
-import { useEffect } from 'react';
+import { Navbar, Videolist, Preview } from './components'
 
 import youtube from './api/youtube';
 
@@ -9,13 +8,15 @@ class App extends React.Component {
   state = {
     videos: [],
     selectedVideo: null,
-    ApiKey1: process.env.REACT_APP_YOUTUBE_API_1
+    ApiKey1: process.env.REACT_APP_YOUTUBE_API_2
   }
 
   onVideoSelect = (video) => {
     this.setState({selectedVideo: video})
     // window.scroll({ behavior: 'smooth'})
     window.scrollTo({ top: 0, behavior: 'smooth'})
+    console.log(video.snippet);
+    this.handleSubmit(video.snippet.title);
   }
 
   componentDidMount() {
@@ -30,7 +31,6 @@ class App extends React.Component {
       });
   
       this.setState({ videos: response.data.items})
-      console.log(this.state.videos);
     }
     generateResults()
   }
@@ -46,7 +46,6 @@ class App extends React.Component {
     });
 
     this.setState({ videos: response.data.items})
-    console.log(this.state.videos);
   }
 
   render() {
@@ -55,16 +54,14 @@ class App extends React.Component {
       <>
         <div className="title-font">
           <Navbar onFormSubmit={this.handleSubmit} />
-          <section className="text-gray-400 bg-black pt-24 sm:pt-36 min-h-screen title-font">
+          <section className="text-gray-400 bg-white pt-[89px] sm:pt-36 min-h-screen title-font">
             { selectedVideo?.length > 0 ? 
               ( '' ) 
               : ( <Preview video={selectedVideo} /> ) 
             }
             <div ref={(el) => { this.messagesEnd = el;}}></div>
-            <div className="container px-5 py-16 mx-auto">
-              <div className="flex flex-wrap sm:-m-4 -mx-4 -mb-10 -mt-4">
-                <Videolist videos={videos} onVideoSelect={this.onVideoSelect}/>
-              </div>
+            <div className="container sm:px-5 py-10 sm:py-20 mx-auto">
+              <Videolist videos={videos} onVideoSelect={this.onVideoSelect}/>
             </div>
           </section>
         </div>

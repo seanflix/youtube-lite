@@ -8,7 +8,8 @@ module.exports = {
     fontFamily: {
       origintech: ["Origintech"],
       realityhyper: ["RealityHyper"]
-    }
+    },
+    darkMode: false
   },
   plugins: [],
 }
