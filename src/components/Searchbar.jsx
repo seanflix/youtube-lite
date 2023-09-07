@@ -11,14 +11,8 @@ class Searchbar extends React.Component {
 
   handleSubmit = (event) => {
     const { searchTerm } = this.state;
-
-    // handling props
-    // this.props.onFormSubmit(searchTerm);
-
-    // shorcut for props
     const { onFormSubmit } = this.props;
     onFormSubmit(searchTerm);
-
     event.preventDefault();
   }
 
@@ -39,7 +33,6 @@ class Searchbar extends React.Component {
       </form>
     )
   }
-
 }
 
 export default Searchbar

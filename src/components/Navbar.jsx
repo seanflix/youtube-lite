@@ -11,8 +11,6 @@ class Navbar extends React.Component {
 
   handleSubmit = (event) => {
     const { searchTerm } = this.state;
-
-    // shorcut for props
     const { onFormSubmit } = this.props;
     onFormSubmit(searchTerm);
     event.preventDefault();
@@ -24,14 +22,14 @@ class Navbar extends React.Component {
     return (
       <header className="text-gray-400 bg-white border-b shadow fixed top-0 right-0 left-0 z-10">
         <div className="container mx-auto flex justify-between align-middle p-5 items-center">
-            <a href="/" className="flex align-middle title-font font-medium items-center mr-3">
+            <div className="flex align-middle title-font font-medium items-center mr-3">
               <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-10 h-10 text-yellow-300 fill-yellow-300 p-2 bg-red-500 rounded-full">
                 <path strokeLinecap="round" strokeLinejoin="round" d="M3.75 13.5l10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75z" />
               </svg>
               <span className="text-gray-600 hidden sm:block ml-3 text-xl font-realityhyper">
                 {process.env.REACT_APP_NAME}
               </span>
-            </a>
+            </div>
             <form onSubmit={this.handleSubmit}>
               <div className="flex bg-gray-200 rounded-full">
                 <input 

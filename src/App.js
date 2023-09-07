@@ -1,6 +1,6 @@
 import React from 'react';
 import './App.css';
-import { Navbar, Videolist, Preview } from './components'
+import { Navbar, Videolist, Preview, Footer } from './components'
 
 import youtube from './api/youtube';
 
@@ -13,9 +13,8 @@ class App extends React.Component {
 
   onVideoSelect = (video) => {
     this.setState({selectedVideo: video})
-    // window.scroll({ behavior: 'smooth'})
+    window.scroll({ behavior: 'smooth'})
     window.scrollTo({ top: 0, behavior: 'smooth'})
-    console.log(video.snippet);
     this.handleSubmit(video.snippet.title);
   }
 
@@ -26,11 +25,10 @@ class App extends React.Component {
           part: 'snippet',
           maxResults: 8,
           key: this.state.ApiKey1,
-          q: 'New Latest',
+          q: 'Web Development',
         }
       });
-  
-      this.setState({ videos: response.data.items})
+      this.setState({ videos: response.data.items })
     }
     generateResults()
   }
@@ -44,8 +42,7 @@ class App extends React.Component {
         q: searchTerm,
       }
     });
-
-    this.setState({ videos: response.data.items})
+    this.setState({ videos: response.data.items })
   }
 
   render() {
@@ -54,16 +51,14 @@ class App extends React.Component {
       <>
         <div className="title-font">
           <Navbar onFormSubmit={this.handleSubmit} />
-          <section className="text-gray-400 bg-white pt-[89px] sm:pt-36 min-h-screen title-font">
-            { selectedVideo?.length > 0 ? 
-              ( '' ) 
-              : ( <Preview video={selectedVideo} /> ) 
-            }
+          <section className="text-gray-400 bg-gradient-to-tr from-red-200 to-yellow-200 pt-[89px] min-h-[87vh] title-font">
+            { (selectedVideo?.length > 0) ? '' : <Preview video={selectedVideo} /> }
             <div ref={(el) => { this.messagesEnd = el;}}></div>
-            <div className="container sm:px-5 py-10 sm:py-20 mx-auto">
+            <div className="container sm:px-5 mx-auto">
               <Videolist videos={videos} onVideoSelect={this.onVideoSelect}/>
             </div>
           </section>
+          <Footer />
         </div>
       </>
     )

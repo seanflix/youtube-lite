@@ -1,15 +1,7 @@
 import React from 'react';
-import './preview.css';
-import { useState } from 'react';
 
 const Preview = ({ video }) => {
-  const [ theater, setTheater ] = useState(false);
-
   if(!video) return null
-  
-  // const toggleTheaterMode = () => {
-  //   setTheater(!theater)
-  // }
 
   const formatDate = (dateString) => {
     const options = { year: "numeric", month: "long", day: "numeric"}
@@ -22,38 +14,33 @@ const Preview = ({ video }) => {
       const decodedHTML = parser.parseFromString(htmlString, 'text/html');
       return decodedHTML.body.textContent || "";
     };
-  
     const decodedString = parseHTML(htmlString);
-  
     return <div>{decodedString}</div>;
   }
 
   return (
     <>
-    {/* <button onClick={ toggleTheaterMode }>Theater Mode</button> */}
-    <div className={ (theater ? 'w-full' : 'container md:px-5 mx-auto flex flex-col') }>
-      <div className={ (theater ? 'w-full' : 'w-full xl:w-8/12 mx-auto sm:rounded-3xl overflow-hidden shadow-lg border') }>
+    <div className="container md:px-5 mx-auto flex flex-col my-10">
+      <div className="w-full xl:w-8/12 mx-auto sm:rounded-3xl overflow-hidden shadow-lg border">
         <div className="w-full">
           <div className="aspect-video">
             {
               video.id.kind === 'youtube#video' ? (
                 <iframe src={'https://www.youtube.com/embed/'+video.id.videoId+'?autoplay=1'} 
-                frameborder="0" 
                 width="100%" 
                 height="100%" 
                 title="videoPlayer" 
                 allow='autoplay; fullscreen'
-                allowfullscreen
+                allowFullScreen
                 ></iframe>
               ) 
               : video.id.kind === 'youtube#channel' ? (
                 <iframe src={'https://www.youtube.com/embed/?listType=user_uploads&list='+video.snippet.title} 
-                frameborder="0" 
                 width="100%" 
                 height="100%" 
                 title="videoPlayer" 
                 allow='autoplay; fullscreen'
-                allowfullscreen
+                allowFullScreen
                 ></iframe>
               ) : null
             }
