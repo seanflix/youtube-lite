@@ -1,6 +1,6 @@
 {
   "homepage": "https://seanflix.github.io/youtube-lite",
-  "name": "youtube-minify",
+  "name": "youtube-lite",
   "version": "0.1.0",
   "private": true,
   "dependencies": {

@@ -8,41 +8,33 @@ class App extends React.Component {
   state = {
     videos: [],
     selectedVideo: null,
-    ApiKey1: process.env.REACT_APP_YOUTUBE_API_2
   }
 
-  onVideoSelect = (video) => {
-    this.setState({selectedVideo: video})
-    window.scroll({ behavior: 'smooth'})
-    window.scrollTo({ top: 0, behavior: 'smooth'})
-    this.handleSubmit(video.snippet.title);
-  }
-
-  componentDidMount() {
-    const generateResults = async () => {
-      const response = await youtube.get('search', { 
-        params: {
-          part: 'snippet',
-          maxResults: 8,
-          key: this.state.ApiKey1,
-          q: 'Web Development',
-        }
-      });
-      this.setState({ videos: response.data.items })
-    }
-    generateResults()
-  }
-  
-  handleSubmit = async (searchTerm) => {
+  initiateYoutubeSearch = async (searchTerm) => {
     const response = await youtube.get('search', { 
       params: {
         part: 'snippet',
         maxResults: 8,
-        key: this.state.ApiKey1,
+        key: process.env.REACT_APP_YOUTUBE_API_3,
         q: searchTerm,
       }
     });
     this.setState({ videos: response.data.items })
+  }
+  
+  handleSubmit = (searchTerm) => {
+    this.initiateYoutubeSearch(searchTerm)
+  }
+
+  onVideoSelect = (video) => {
+    this.setState({ selectedVideo: video })
+    window.scroll({ behavior: 'smooth' })
+    window.scrollTo({ top: 0, behavior: 'smooth' })
+    this.handleSubmit(video.snippet.title);
+  }
+
+  componentDidMount() {
+    this.initiateYoutubeSearch('Web Development')
   }
 
   render() {

@@ -20,27 +20,36 @@ const Preview = ({ video }) => {
 
   return (
     <>
-    <div className="container md:px-5 mx-auto flex flex-col my-10">
+    <div className="container md:px-5 mx-auto flex flex-col sm:my-10">
       <div className="w-full xl:w-8/12 mx-auto sm:rounded-3xl overflow-hidden shadow-lg border">
         <div className="w-full">
           <div className="aspect-video">
             {
               video.id.kind === 'youtube#video' ? (
                 <iframe src={'https://www.youtube.com/embed/'+video.id.videoId+'?autoplay=1'} 
-                width="100%" 
-                height="100%" 
-                title="videoPlayer" 
-                allow='autoplay; fullscreen'
-                allowFullScreen
+                  width="100%" 
+                  height="100%" 
+                  title="videoPlayer" 
+                  allow='autoplay; fullscreen'
+                  allowFullScreen
                 ></iframe>
               ) 
               : video.id.kind === 'youtube#channel' ? (
                 <iframe src={'https://www.youtube.com/embed/?listType=user_uploads&list='+video.snippet.title} 
-                width="100%" 
-                height="100%" 
-                title="videoPlayer" 
-                allow='autoplay; fullscreen'
-                allowFullScreen
+                  width="100%" 
+                  height="100%" 
+                  title="videoPlayer" 
+                  allow='autoplay; fullscreen'
+                  allowFullScreen
+                ></iframe>
+              ) 
+              : video.id.kind === 'youtube#playlist' ? (
+                <iframe src={'https://www.youtube.com/embed/gQojMIhELvM?si='+video.id.playlistId} 
+                  width="100%" 
+                  height="100%" 
+                  title="videoPlayer" 
+                  allow='autoplay; fullscreen'
+                  allowFullScreen
                 ></iframe>
               ) : null
             }
